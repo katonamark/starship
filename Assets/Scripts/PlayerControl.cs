@@ -102,8 +102,8 @@ public class PlayerControl : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D col){
-        //detect collision of the player ship with an enemy ship, or with an enemy bullet
-        if ((col.tag == "EnemyShipTag") || (col.tag == "EnemyBulletTag")){
+        //detect collision of the player ship with an enemy ship, or with an enemy bullet, or with an asteroid
+        if ((col.tag == "EnemyShipTag") || (col.tag == "EnemyBulletTag") || (col.tag == "AsteroidTag")){
             PlayExplosion();
 
             Lives--; //substract one live
