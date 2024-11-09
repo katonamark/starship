@@ -6,10 +6,11 @@ TagManager:
   tags:
   - PlayerShipTag
   - EnemyShipTag
-  - PlayerBulletTag
   - EnemyBulletTag
   - ScoreTextTag
   - AsteroidTag
+  - PlayerBulletTag01
+  - PlayerBulletTag02
   layers:
   - Default
   - TransparentFX

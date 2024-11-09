@@ -654,7 +654,7 @@ GameObject:
   - component: {fileID: 576075717}
   m_Layer: 0
   m_Name: BulletPosition01
-  m_TagString: Untagged
+  m_TagString: PlayerBulletTag01
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1078,7 +1078,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameManagerGO: {fileID: 313373618}
-  PlayerBulletGO: {fileID: 6079403204601932532, guid: f536e1fa107094842b803b35c5687648, type: 3}
+  PlayerBulletGO01: {fileID: 6079403204601932532, guid: f536e1fa107094842b803b35c5687648, type: 3}
+  PlayerBulletGO02: {fileID: 5367532878010127162, guid: 1a8e0b187dd97854a98e366b5c120831, type: 3}
   bulletPosition01: {fileID: 576075716}
   bulletPosition02: {fileID: 1269931373}
   ExplosionGO: {fileID: 9177448264465024892, guid: 6fdb1c39868e6094ba5ac8eac0c151a9, type: 3}
@@ -1347,7 +1348,7 @@ GameObject:
   - component: {fileID: 1269931374}
   m_Layer: 0
   m_Name: BulletPosition02
-  m_TagString: Untagged
+  m_TagString: PlayerBulletTag02
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
