@@ -8,6 +8,7 @@ public class EnemyControl : MonoBehaviour
     GameObject scoreUITextGO; //Reference to the text UI game object
     public GameObject ExplosionGO; //this is our explosion prefab 
     float speed; //for the enemy speed
+    private bool hasHit = false; // Flag to check if the enemy has already been hit
 
     // Start is called before the first frame update
     void Start()
@@ -41,15 +42,26 @@ public class EnemyControl : MonoBehaviour
 
     }
 
-    void OnTriggerEnter2D(Collider2D col){
-        //detect collision of the enemy ship with the players ship, or with a players bullet
-        if ((col.tag == "PlayerShipTag") || (col.tag == "PlayerBulletTag")){
-            PlayExplosion();
+    
 
-            //add 100 points to the score
-            scoreUITextGO.GetComponent<GameScore>().Score += 100;
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        // Detect collision of the enemy with the player's ship or bullets
+        if ((col.tag == "PlayerShipTag") || (col.tag == "PlayerBulletTag01") || (col.tag == "PlayerBulletTag02"))
+        {
+            // Only add points if the enemy hasn't been hit yet
+            if (!hasHit)
+            {
+                PlayExplosion();
 
-            //destroy this enemy ship
+                // Add 100 points to the score
+                scoreUITextGO.GetComponent<GameScore>().Score += 100;
+
+                // Set the flag to true to prevent further score increases
+                hasHit = true;
+            }
+
+            // Destroy the enemy ship after it is hit
             Destroy(gameObject);
         }
     }

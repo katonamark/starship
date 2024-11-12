@@ -7,7 +7,8 @@ public class PlayerControl : MonoBehaviour
 {
     public GameObject GameManagerGO; //reference to our game manager
 
-    public GameObject PlayerBulletGO; //This is our players bullet prefab
+    public GameObject PlayerBulletGO01; //This is our players bullet 01 prefab
+    public GameObject PlayerBulletGO02; //This is our players bullet 02 prefab
     public GameObject bulletPosition01;
     public GameObject bulletPosition02;
     public GameObject ExplosionGO; //this is our explosion prefab
@@ -51,11 +52,11 @@ public class PlayerControl : MonoBehaviour
             GetComponent<AudioSource>().Play();
 
             //instantiate the first bullet
-            GameObject bullet01 = (GameObject)Instantiate (PlayerBulletGO);
+            GameObject bullet01 = (GameObject)Instantiate (PlayerBulletGO01);
             bullet01.transform.position = bulletPosition01.transform.position; //set the bullet initial position
             
             //instantiate the seconf bullet
-            GameObject bullet02 = (GameObject)Instantiate(PlayerBulletGO);
+            GameObject bullet02 = (GameObject)Instantiate(PlayerBulletGO02);
             bullet02.transform.position = bulletPosition02.transform.position; //set the bullet initial position
 
         }
@@ -102,8 +103,8 @@ public class PlayerControl : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D col){
-        //detect collision of the player ship with an enemy ship, or with an enemy bullet
-        if ((col.tag == "EnemyShipTag") || (col.tag == "EnemyBulletTag")){
+        //detect collision of the player ship with an enemy ship, or with an enemy bullet, or with an asteroid
+        if ((col.tag == "EnemyShipTag") || (col.tag == "EnemyBulletTag") || (col.tag == "AsteroidTag")){
             PlayExplosion();
 
             Lives--; //substract one live
