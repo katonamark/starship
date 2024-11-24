@@ -5,26 +5,28 @@ using UnityEngine;
 public class Boss1Controller : MonoBehaviour
 {
     public float speed = 0f;                   // Főgonosz sebessége
-    public float shootingInterval = 2f;        // Lövések közötti időköz
-    public int Lives = 12;
-    private bool hasHit = false;
-    public GameObject bulletPrefab;            // Lövedék prefabja
-    public Transform bulletSpawnPoint;         // Lövedék kilövési pozíciója
-    public Transform player; 
-    GameObject scoreUITextGO;                  // Játékos pozíciója
-    private bool movingRight = true;           // Kezdeti mozgásirány jobbra
-    //private float timeSinceLastShot = 0f;      // Utolsó lövés óta eltelt idő
+    public float shootingInterval = 2f;       // Lövések közötti időköz
+    public int Lives = 12;                    // Boss1 élete
+    public GameObject bulletPrefab;           // Lövedék prefabja
+    public Transform bulletSpawnPoint;        // Lövedék kilövési pozíciója
+    public Transform player;                  // Játékos pozíciója
+    GameObject scoreUITextGO;                 // Pontszám UI
+    private bool movingRight = true;          // Kezdeti mozgásirány jobbra
+    public GameObject ExplosionGO;            //explosion prefab
 
     void Start()
     {
         // Kezdetben véletlenszerűen állítja be az irányt
         movingRight = Random.value > 0.5f;
+
+        // Megkeressük a pontszámkezelő UI-t 
+        scoreUITextGO = GameObject.FindGameObjectWithTag("ScoreTextTag");
     }
 
     void Update()
     {
         Move();
-        //Shoot();
+        // A lövés logika kiegészíthető itt
     }
 
     // Főgonosz jobbra-balra mozgatása
@@ -49,36 +51,44 @@ public class Boss1Controller : MonoBehaviour
         {
             movingRight = true;
         }
-        
     }
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        // Detect collision of the enemy with the player's ship or bullets
-        if ((col.tag == "PlayerShipTag") || (col.tag == "PlayerBulletTag01") || (col.tag == "PlayerBulletTag02"))
+        // Érzékeli, ha a játékos lövedékei vagy hajója eltalálja a boss1-et
+        if (col.CompareTag("PlayerBulletTag01") || col.CompareTag("PlayerBulletTag02") || col.CompareTag("PlayerShipTag"))
         {
-            // Only add points if the enemy hasn't been hit yet
-        
-            if (!hasHit)
+            // Csökkentjük a boss életét
+            Lives--;
+            
+            PlayExplosion();
+
+            // Növeljük a játékos pontszámát
+            if (scoreUITextGO != null)
             {
-                //PlayExplosion();
-
-                // Add 100 points to the score
                 scoreUITextGO.GetComponent<GameScore>().Score += 100;
-
-                // Set the flag to true to prevent further score increases
-                //hasHit = true;
-                Lives-=1;
-
             }
 
-            if(Lives==0) {
-            
-            Destroy(gameObject);
+            // Ha az élet 0, elpusztítjuk a boss1-et
+            if (Lives <= 0)
+            {
+                Destroy(gameObject);
+            }
+
+            // Elpusztítjuk a játékos lövedékét (ha az találta el)
+            if (col.CompareTag("PlayerBulletTag01") || col.CompareTag("PlayerBulletTag02"))
+            {
+                Destroy(col.gameObject);
+            }
         }
     }
+     //function to intantiate an explosion
+    void PlayExplosion(){
+        GameObject explosion = (GameObject)Instantiate (ExplosionGO);
+
+        //set the position of the explosion
+        explosion.transform.position = transform.position;
     }
 
-    
 }
 

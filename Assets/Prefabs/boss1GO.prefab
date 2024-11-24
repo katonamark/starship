@@ -187,9 +187,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   shootingInterval: 2
-  bulletPrefab: {fileID: 0}
+  Lives: 12
+  bulletPrefab: {fileID: 4313506694221661422, guid: af6c46f7de49fc041924d62b8662963d, type: 3}
   bulletSpawnPoint: {fileID: 0}
   player: {fileID: 0}
+  ExplosionGO: {fileID: 7189085059905084518, guid: 51b4843ac9de2744f9fa96496d43140c, type: 3}
 --- !u!61 &4920233679735406921
 BoxCollider2D:
   m_ObjectHideFlags: 0

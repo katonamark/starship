@@ -66,7 +66,6 @@ public class BossBullet : MonoBehaviour
             // A játékos hajóját érintette, itt elhelyezhetjük a sebzés logikát is
             Destroy(gameObject);  // A lövedék eltűnik
 
-            // További logika a játékos sebzésére (pl. élet csökkentése) itt hozzáadható
         }
     }
 }

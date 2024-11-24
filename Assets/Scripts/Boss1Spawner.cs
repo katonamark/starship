@@ -7,7 +7,7 @@ using UnityEngine;
 public class Boss1SpawnerGO : MonoBehaviour
 {
     public GameObject boss1GO;    // Húzd ide a boss1GO prefabot
-    public int spawnScore = 1000;   // A pontszám, amelynél a boss megjelenik
+    public int spawnScore = 100;   // A pontszám, amelynél a boss megjelenik
 
     private bool hasSpawned = false; // Ellenőrzi, hogy a boss megjelent-e már
     private GameScore gameScore;    // Hivatkozás a GameScore scriptre
@@ -22,7 +22,7 @@ public class Boss1SpawnerGO : MonoBehaviour
             Debug.LogError("GameScore script not found in the scene!");
         }
 
-        // Késleltetés a rendszer beállításához, nem kötelező
+        
         InvokeRepeating("CheckScoreAndSpawnBoss", 1f, 1f); // Ellenőrzés 1 másodpercenként
     }
 
@@ -39,6 +39,8 @@ public class Boss1SpawnerGO : MonoBehaviour
     {
         // A boss megjelenítése a bal felső sarokban
         Vector3 spawnPosition = GetTopLeftCorner();
+        spawnPosition.x += 0.8f; // X tengelyen jobbra mozgatjuk
+        spawnPosition.y -= 0.8f; // Y tengelyen lefelé mozgatjuk
         Instantiate(boss1GO, spawnPosition, Quaternion.identity);
 
         hasSpawned = true; // Csak egyszer jelenik meg
